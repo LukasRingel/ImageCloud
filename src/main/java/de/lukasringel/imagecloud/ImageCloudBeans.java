@@ -1,6 +1,5 @@
 package de.lukasringel.imagecloud;
 
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.storage.Bucket;
 import com.google.cloud.storage.StorageOptions;
 import org.redisson.Redisson;
@@ -31,12 +30,13 @@ public class ImageCloudBeans {
       properties.getProperty("image-cloud-authentication-key"),
       properties.getProperty("image-cloud-bucket-name"),
       properties.getProperty("image-cloud-base-url"),
-      properties.getProperty("image-cloud-redis-url")
+      properties.getProperty("image-cloud-redis-url"),
+      properties.getProperty("image-cloud-maxmind-url")
     );
   }
 
   @Bean
-  public ImageCloudSettings settings()  {
+  public ImageCloudSettings settings() {
     return settings;
   }
 

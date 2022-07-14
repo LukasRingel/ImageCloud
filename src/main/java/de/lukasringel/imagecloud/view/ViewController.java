@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
 import java.net.URI;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -36,7 +38,8 @@ public class ViewController {
   }
 
   @GetMapping("/{requestedId}")
-  public CompletableFuture<ResponseEntity<Resource>> viewImage(@PathVariable String requestedId) {
+  public CompletableFuture<ResponseEntity<Resource>> viewImage(@PathVariable String requestedId,
+                                                               HttpServletRequest request) {
     var imageId = formatToValidImageId(requestedId);
 
     if (!isValidImageId(imageId)) {
@@ -53,7 +56,10 @@ public class ViewController {
             this,
             imageId,
             cachedImage,
-            ImageViewedEvent.ImageSource.REDIS
+            ImageViewedEvent.ImageSource.REDIS,
+            InetAddress.getByName(
+              request.getHeader("X-FORWARDED-FOR")
+            )
           ));
           return sendValidImage(cachedImage);
         }
@@ -64,7 +70,10 @@ public class ViewController {
             this,
             imageId,
             storageImage,
-            ImageViewedEvent.ImageSource.GOOGLE_CLOUD
+            ImageViewedEvent.ImageSource.GOOGLE_CLOUD,
+            InetAddress.getByName(
+              request.getHeader("X-FORWARDED-FOR")
+            )
           ));
           return sendValidImage(storageImage);
         }

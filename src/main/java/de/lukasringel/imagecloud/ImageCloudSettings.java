@@ -4,6 +4,7 @@ public record ImageCloudSettings(
   String authenticationKey,
   String bucketName,
   String baseUrl,
-  String redisUrl
+  String redisUrl,
+  String maxmindDownloadUrl
 ) {
 }

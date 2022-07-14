@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'de.lukasringel'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 sourceCompatibility = '16'
 
 configurations {
@@ -23,6 +23,8 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation 'com.google.cloud:google-cloud-storage'
   implementation 'org.redisson:redisson:3.17.3'
+  implementation 'com.maxmind.geoip2:geoip2:3.0.1'
+  implementation 'org.rauschig:jarchivelib:1.2.0'
   compileOnly 'org.projectlombok:lombok'
   annotationProcessor 'org.projectlombok:lombok'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
